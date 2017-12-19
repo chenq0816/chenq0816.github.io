@@ -1,4 +1,3 @@
-
   $(document).ready(function(){
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
@@ -20,20 +19,19 @@
     }
   );
 
+  var count= 0;
+
   function getScreen(){
-    var name= $('#task-content').val();
     console.log(name);
-    html2canvas(document.body, {
+    html2canvas($('#defaultCanvas0'), {
       dpi: 192,
       onrendered: function(canvas){
         $('#blank').attr('href', canvas.toDataURL("image/png"));
-        $('#blank').attr('download', name+'.png');
+        $('#blank').attr('download', count+'.png');
         $('#blank')[0].click();
       }
     })
   }
-
-  var count= 0;
 
   document.getElementById('add').addEventListener('click', function(){
   	var value= document.getElementById('task-content').value;
@@ -50,7 +48,9 @@
       var modal2= document.getElementById('modal2');
       var img = document.createElement('IMG');
       img.id= "img";
-      img.src = "image/"+ count+ ".png";
+      var name= count;
+      console.log(name);
+      img.src ="image/"+name+".png";
       img.width = "200";
       img.height = "200";
       
@@ -68,25 +68,12 @@
 
       document.getElementById('task-content').value='';
 
+      count++;
+
       getScreen();
 
-      count++;
   	} 
   })
-
-  //   document.getElementById('delete').addEventListener('click',function(){
-  //     var item= this.parentNode.parentNode;
-  //     var parent= item.parentNode;
-  //     parent.removeChild(item);
-  // })
-  //     var len= list.childNodes.length;
-
-  //     for(var i=0; i<len; i++){
-  //       if(i==len-1){
-  //         list.removeChild(list.childNodes[i]);
-  //       }
-  //     }
-  // })
 
     document.getElementById('remove').addEventListener('click',function(){
         var list= document.getElementById('list');
@@ -99,22 +86,7 @@
 
   })
 
-    document.getElementById('icon').addEventListener('click',function(){
-      console.log("hey");
-      var modal2= document.getElementById('modal2');
-      var img = document.createElement('IMG');
-      img.src = "image/0.png";
-      modal2.appendChild(img);
-    })
 
-    // document.getElementById('done').addEventListener('click',function(){
-    // 	var value= document.getElementById('task-content2').value;
-    // 	var list= document.getElementById('list');
-    // 	var val= list.childNodes[0];
-    // 	val.innerText= value;
-
-    // 	document.getElementById('task-content2').value='';
-    // })
 
 
 
